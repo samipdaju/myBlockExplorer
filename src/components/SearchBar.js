@@ -15,12 +15,12 @@ import {
   MenuItemOption,
 } from "@chakra-ui/react";
 import { ChevronDownIcon, SearchIcon } from "@chakra-ui/icons";
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { color } from "framer-motion";
-
+import { Web3Context } from "./Web3Context";
 export default function SearchBar() {
-  const navigate = useNavigate();
+  const { web3, handleNavigate } = useContext(Web3Context);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -32,17 +32,6 @@ export default function SearchBar() {
 
   function handleInputChange(event) {
     setInputValue(event.target.value);
-  }
-
-  function handleSubmit(){
-    
-    if (selectedOption === "Transaction Hash") {
-      navigate("/transaction-details", { state: { someData: inputValue } });
-    } else if (selectedOption === "Address") {
-      navigate("/address-details", { state: { someData: inputValue } });
-    } else if (selectedOption === "Block Number") {
-      navigate("/block", { state: { blockNumber: inputValue } });
-    }
   }
 
   return (
@@ -112,7 +101,7 @@ export default function SearchBar() {
             borderRadius={5}
             px={2}
             py={1}
-            onClick={handleSubmit}
+            onClick={() => handleNavigate(selectedOption, inputValue)}
           >
             <Box as="span">
               <SearchIcon color={"white"} />
