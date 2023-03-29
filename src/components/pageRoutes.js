@@ -1,9 +1,9 @@
 const pageRoutes = {
   dashboard: "/",
   blockDetails: "/block-details",
-  transactionDetails: "/transaction-details",
-  singleBlock: "/block",
-  addressDetails: "/address-details",
+  transactionDetails: "/transaction/:transactionHash",
+  singleBlock: "/block/:blockNumber",
+  addressDetails: "/address/:address",
 };
 
 const formatAsChildRoute = (url, parentUrl) => {

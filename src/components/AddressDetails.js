@@ -4,16 +4,18 @@ import { Box, Text, HStack, VStack, Link, Divider } from "@chakra-ui/react";
 import Web3 from "web3";
 import { Avatar } from "@chakra-ui/react";
 import { useQuery } from "react-query";
-
+import Logo from "./Logo";
 import { useNavigate, useLocation } from "react-router-dom";
 import NoResultFound from "./NoResultFound";
+import { useParams } from "react-router-dom";
 
 export default function AddressDetails() {
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
   const location = useLocation();
-  const address = location.state.someData;
+  const { address } = useParams();
+  console.log(`address: ${address}`);
 
   function showAll() {
     setShow(!show);
@@ -54,19 +56,20 @@ export default function AddressDetails() {
   }
 
   return (
-    <Box w="100%" p={10}>
-      <HStack>
+    <Box w="100%" p={10} bg="default" h="200vh">
+      <Logo />
+      <HStack mt={20}>
         <Avatar
           height={"35px"}
           width="35px"
           src="https://mintspace.io/wp-content/uploads/2021/10/183.png"
         />
         <Box fontSize="20px" fontWeight="bold">
-          Address: {address}
+          <Text color="white"> Address: {address}</Text>
         </Box>
       </HStack>
 
-      <Box borderRadius={5} bg="blue.600" px={5} py={3} width="10%" mt={10}>
+      <Box borderRadius={5} bg="btn" px={5} py={3} width="10%" mt={10}>
         <Text fontSize="18px" textColor="white" fontWeight={500}>
           Transactions
         </Text>
@@ -77,14 +80,13 @@ export default function AddressDetails() {
         borderRadius={25}
         mt={10}
         boxShadow="md"
-        border="1px"
-        borderColor="gray.200"
+        borderColor="border"
+        border="2px solid"
       >
         <HStack
           p={5}
           color="white"
           borderTopRadius={25}
-          bg="#21325B"
           display="flex"
           w={"100%"}
           spacing={20}
@@ -102,14 +104,14 @@ export default function AddressDetails() {
         {requiredTransactions.map((item, index) => (
           <Box
             key={index}
-            border="1px"
-            borderColor="gray.200"
+            border="1px solid"
+            borderColor="border"
             borderBottomRadius={
               index === requiredTransactions.length - 1 ? 25 : 0
             }
-            py={2}
+            py={3}
             px={5}
-            bg={index % 2 === 0 ? "transparent" : "gray.200"}
+            // bg={index % 2 === 0 ? "transparent" }
           >
             <HStack
               display="flex"
@@ -125,7 +127,7 @@ export default function AddressDetails() {
                   textDecoration: "underline",
                   cursor: "pointer",
                 }}
-                color="blue"
+                color="white"
               >
                 {"  "}
                 {item.hash.slice(0, 8)}...
@@ -139,32 +141,31 @@ export default function AddressDetails() {
                 borderColor="gray.300"
                 fontSize="12px"
               >
-                {" "}
-                Transfer{" "}
+                <Text color="gray">Transfer</Text>
               </Box>
               <Link
                 flex="1"
-                color="blue"
+                color="white"
                 overflowX={"auto"}
                 onClick={() => handleNavigate("Block Number", item.blockNumber)}
               >
                 {" "}
                 {item.blockNumber}
               </Link>
-              <Link flex="1" color="blue">
+              <Link flex="1" color="white">
                 {" "}
                 {item.from.slice(0, 8)}...{" "}
               </Link>
               <Box flex="1">
                 {item.to != null ? (
-                  <Link flex="1" color="blue">
+                  <Link flex="1" color="white">
                     {item.to.slice(0, 8)}....
                   </Link>
                 ) : (
                   <Text align="center"> - </Text>
                 )}
               </Box>
-              <Link flex="1" color="blue">
+              <Link flex="1" color="white">
                 {" "}
                 {item.gas}
               </Link>
@@ -178,7 +179,7 @@ export default function AddressDetails() {
                 fontSize="12px"
               >
                 {" "}
-                {item.value}
+                <Text color="white">{item.value}</Text>
               </Box>
             </HStack>
           </Box>
@@ -186,7 +187,7 @@ export default function AddressDetails() {
         {data.length > 5 && (
           <VStack p={2}>
             {" "}
-            <Link onClick={showAll} decoration="underline">
+            <Link onClick={showAll} decoration="underline" color="gray">
               {" "}
               {show ? "See less tansactions" : "See all Transactions"}
             </Link>

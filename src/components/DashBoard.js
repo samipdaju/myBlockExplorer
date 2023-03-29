@@ -8,7 +8,7 @@ import Logo from "./Logo";
 
 export default function DashBoard() {
   return (
-    <Box>
+    <Box bg="default" h="130vh">
       <Box w="100%" justifyItems="end" px={15} p={10}>
         <Logo />
       </Box>

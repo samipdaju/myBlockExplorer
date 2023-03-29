@@ -14,9 +14,10 @@ export default function Logo() {
       <HStack cursor={"pointer"} onClick={handleNavigate}>
         <Circle
           size={"40px"}
-          bgGradient="linear-gradient(to left, #0670A6,#21325B  )"
+          bg="btn"
+          // bgGradient=" linear-gradient(to left, #F77221, #A94B0C)"
         ></Circle>
-        <Text color={"#21325B"} fontWeight="bold" fontSize="24px">
+        <Text color={"white"} fontWeight="bold" fontSize="24px">
           {" "}
           BlockExplorer
         </Text>

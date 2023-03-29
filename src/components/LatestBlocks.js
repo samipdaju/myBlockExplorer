@@ -33,15 +33,21 @@ export default function LatestBlocks() {
 
   return (
     <Box w="50%" mb={10}>
-      <Box w="100%" borderColor={"gray.300"} borderRadius={25} boxShadow="md">
-        <Box bg="#21325B" borderTopRadius={25} align="center">
+      <Box w="100%" borderColor={"border"} borderRadius={25} border="1px solid">
+        <Box
+          bg="btn"
+          // bg= "#21325B"
+
+          borderTopRadius={25}
+          align="center"
+        >
           <Text fontSize="20px" fontWeight={500} color="white" p={5}>
             Latest Blocks
           </Text>
         </Box>
 
         {data.slice(0, 5).map((item, index) => (
-          <Box border="1px" borderColor="gray.200" py={2} px={2}>
+          <Box border="1px" borderColor="border" py={2} px={2}>
             <HStack
               key={index}
               w={"100%"}
@@ -49,13 +55,7 @@ export default function LatestBlocks() {
               justifyContent="space-between"
             >
               <HStack>
-                <Box
-                  bgColor="gray"
-                  borderRadius={10}
-                  py={4}
-                  px={5}
-                  opacity="30%"
-                >
+                <Box bgColor="gray.500" borderRadius={10} py={4} px={5}>
                   <Icon color="white" as={FaLink} />
                 </Box>
 
@@ -67,7 +67,8 @@ export default function LatestBlocks() {
                       textDecoration: "underline",
                       cursor: "pointer",
                     }}
-                    color="blue"
+                    color="white
+                    "
                   >
                     {"  "}
                     {item.number}
@@ -80,7 +81,7 @@ export default function LatestBlocks() {
               </HStack>
               {/* This link will navigate to the latest transaction of the block */}
               <Link
-                color="blue"
+                color="white"
                 onClick={() =>
                   handleNavigate(
                     "Transaction Hash",

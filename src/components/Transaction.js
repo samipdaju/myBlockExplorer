@@ -7,9 +7,12 @@ import Web3 from "web3";
 import NoResultFound from "./NoResultFound";
 import Logo from "./Logo";
 import { useQuery } from "react-query";
+import { useParams } from "react-router-dom";
+
 export default function Transaction() {
-  const location = useLocation();
-  const transactionHash = location.state?.someData;
+  const { transactionHash } = useParams();
+
+  console.log(`Transaction: ${transactionHash}`);
   const { web3, handleNavigate } = useContext(Web3Context);
 
   const { status, data, error, isFetching } = useQuery(
@@ -25,11 +28,22 @@ export default function Transaction() {
   }
 
   return (
-    <Box p={10}>
+    <Box p={10} bg="default" h="120vh">
       <Logo></Logo>
 
-      <Box my={10} borderColor="gray.200" borderRadius={20} boxShadow="lg">
-        <Box bg="#21325B" borderTopRadius={20} align="start">
+      <Box
+        my={10}
+        borderColor="border"
+        border="2px solid"
+        borderRadius={20}
+        boxShadow="lg"
+      >
+        <Box
+          borderTopRadius={20}
+          align="start"
+          borderBottom="2px solid"
+          borderColor="border"
+        >
           <HStack px={10} py={5}>
             <Text fontSize="20px" fontWeight={500} color="white">
               Transaction
@@ -51,7 +65,7 @@ export default function Transaction() {
               block:
             </Text>
 
-            <Box height="2px" bg="gray.300" width="100%">
+            <Box height="2px" bg="border" width="100%">
               {" "}
             </Box>
 
@@ -65,7 +79,7 @@ export default function Transaction() {
               to:
             </Text>
 
-            <Box height="2px" bg="gray.300" width="100%">
+            <Box height="2px" bg="border" width="100%">
               {" "}
             </Box>
             <Text fontSize="20px" color="gray.500">
@@ -79,30 +93,38 @@ export default function Transaction() {
           </VStack>
 
           <VStack alignItems={"start"} spacing={10}>
-            <Link color="blue.400" fontSize="20px">
+            <Link color="white" fontSize="20px">
               {" "}
               {data.hash}{" "}
             </Link>
 
             <Link
               fontSize="20px"
-              color="blue.400"
+              color="white"
               onClick={() => handleNavigate("Block Number", data.blockNumber)}
             >
               {" "}
               {data.blockNumber}{" "}
             </Link>
-            <Box height="2px" bg="gray.300" width="100%">
+            <Box height="2px" bg="border" width="100%">
               {" "}
             </Box>
 
-            <Link color="blue.400" fontSize="20px">
+            <Link
+              color="blue.400"
+              fontSize="20px"
+              onClick={() => handleNavigate("Address", data.from)}
+            >
               {" "}
               {data.from}{" "}
             </Link>
 
             {data.to != null ? (
-              <Link color="blue.400" fontSize="20px">
+              <Link
+                color="blue.400"
+                fontSize="20px"
+                onClick={() => handleNavigate("Address", data.to)}
+              >
                 {" "}
                 {data.to}
               </Link>
@@ -110,14 +132,14 @@ export default function Transaction() {
               <Text fontSize="20px"> {"-"}</Text>
             )}
 
-            <Box height="2px" bg="gray.300" width="100%">
+            <Box height="2px" bg="border" width="100%">
               {" "}
             </Box>
-            <Link color="blue.400" fontSize="20px">
+            <Link color="white" fontSize="20px">
               {" "}
               {data.gas}{" "}
             </Link>
-            <Link color="blue.400" fontSize="20px">
+            <Link color="white" fontSize="20px">
               {" "}
               {data.value}{" "}
             </Link>

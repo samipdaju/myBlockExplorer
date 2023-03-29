@@ -3,7 +3,7 @@ import "./App.css";
 import { Web3Provider } from "./components/Web3Context";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import { ChakraProvider } from "@chakra-ui/react";
-
+import chakraTheme from "./theme";
 import React from "react";
 
 import AppRoutes from "./components/AppRoutes";
@@ -13,7 +13,7 @@ const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={chakraTheme}>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
           <Web3Provider>

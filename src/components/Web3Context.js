@@ -13,11 +13,15 @@ function Web3Provider(props) {
 
   const handleNavigate = (selectedOption, inputValue) => {
     if (selectedOption === "Transaction Hash") {
-      navigate("/transaction-details", { state: { someData: inputValue } });
+      navigate(`/transaction/${inputValue}`, {
+        state: { transactionNumber: inputValue },
+      });
     } else if (selectedOption === "Address") {
-      navigate("/address-details", { state: { someData: inputValue } });
+      navigate(`/address/${inputValue}`, {
+        state: { addressNumber: inputValue },
+      });
     } else if (selectedOption === "Block Number") {
-      navigate("/block", { state: { blockNumber: inputValue } });
+      navigate(`/block/${inputValue}`, { state: { blockNumber: inputValue } });
     }
   };
   const values = { web3, handleNavigate };

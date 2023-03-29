@@ -42,29 +42,23 @@ export default function LatestTransactions() {
   });
 
   if (isFetching) {
-    return <Box></Box>;
+    return <Box bg="default"></Box>;
   }
 
   return (
     <Box w="50%">
-      <Box w="100%" borderRadius={25} boxShadow="lg">
-        <Box bg="#21325B" borderTopRadius={25} align="center">
+      <Box w="100%" borderRadius={25} borderColor={"border"} border="1px solid">
+        <Box bg="btn" borderTopRadius={25} align="center">
           <Text fontSize="20px" fontWeight={500} color="white" p={5}>
             Latest Transactions
           </Text>
         </Box>
 
         {data.slice(0, 5).map((item, index) => (
-          <Box key={index} border="1px" borderColor="gray.200" py={2} px={2}>
+          <Box key={index} border="1px" borderColor="border" py={2} px={2}>
             <Flex w={"100%"} spacing={15} justifyContent="space-between">
               <HStack>
-                <Box
-                  bgColor="gray"
-                  borderRadius={10}
-                  px={5}
-                  py={4}
-                  opacity="50%"
-                >
+                <Box bgColor="gray.500" borderRadius={10} px={5} py={4}>
                   <Icon color="white" as={FaBook} />
                 </Box>
 
@@ -78,7 +72,7 @@ export default function LatestTransactions() {
                       textDecoration: "underline",
                       cursor: "pointer",
                     }}
-                    color="blue"
+                    color="white"
                   >
                     {"  "}
                     {item.hash.slice(0, 5)}...{item.hash.slice(-5)}
@@ -89,10 +83,10 @@ export default function LatestTransactions() {
               </HStack>
               <VStack>
                 <HStack>
-                  <Text> From: </Text>
+                  <Text color="gray"> From: </Text>
                   <Link
                     onClick={() => handleNavigate("Address", item.from)}
-                    color="blue"
+                    color="white"
                   >
                     {" "}
                     {item.from.slice(0, 5)}...{item.from.slice(-5)}
@@ -101,10 +95,10 @@ export default function LatestTransactions() {
 
                 {item.to != null && (
                   <HStack>
-                    <Text> To: </Text>
+                    <Text color="gray"> To: </Text>
 
                     <Link
-                      color="blue"
+                      color="white"
                       onClick={() => handleNavigate("Address", item.to)}
                     >
                       {" "}
