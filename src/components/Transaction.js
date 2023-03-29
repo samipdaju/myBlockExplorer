@@ -23,10 +23,12 @@ export default function Transaction() {
     }
   );
 
-  if (!data) {
+  if (isFetching) {
+    return <Box></Box>;
+  }
+  if (error || !data) {
     return <NoResultFound />;
   }
-
   return (
     <Box p={10} bg="default" h="120vh">
       <Logo></Logo>
